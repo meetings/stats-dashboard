@@ -2,11 +2,13 @@
 
 ci_setup() {
     DIR=`dirname $1`
-    SCRIPT=`basename $1`
-    INTENT=`basename $DIR`
+    logger -t ci_upgrade -p local0.info "ci DIR: $DIR"
+    # SCRIPT=`basename $1`
+    # INTENT=`basename $DIR`
 }
 
 ci_upgrade() {
+    return
     logger -t ci_upgrade -p local0.info "ci: called"
     cd $DIR
     echo dir: $DIR
@@ -21,6 +23,7 @@ ci_upgrade() {
 }
 
 ci_install() {
+    return
     true
     logger -t ci_install -p local0.info "pwd at inst: `pwd`"
     cat ${INTENT}.conf > /etc/init/${INTENT}.conf
@@ -29,6 +32,7 @@ ci_install() {
 }
 
 ci_restart() {
+    return
     true
     # shutdown -r now
     echo service stats restart
