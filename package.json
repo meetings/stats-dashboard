@@ -1,0 +1,20 @@
+{
+  "name": "stats",
+  "version": "0.0.1",
+  "description": "Something...",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "echo No tests specified"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/meetings/stats.git"
+  },
+  "author": "Tuomas Starck <tuomas@meetin.gs>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "66c7d13f374f294680ab7c654d0b7c8e99387d6d",
+  "bugs": {
+    "url": "https://github.com/meetings/stats/issues"
+  }
+}
