@@ -3,10 +3,11 @@
 var server = require("./server");
 var router = require("./router");
 var requestHandlers = require("./requestHandlers")
+var pool = require("./pool").pool;
 
-var handle={}
-/*handle["/"] = requestHandlers.start;*/
+var handle = {}
 
+handle["/pool"] = pool;
 handle["/repeat_users"] = requestHandlers.repeat_users;
 handle["/registered_within_three"] = requestHandlers.registered_within_three;
 handle["/reg_organizers"] = requestHandlers.reg_organizers;
