@@ -4,11 +4,9 @@
 var fs = require("fs");
 
 var intent = "stats";
-var filename = "version";
+var filename = process.env.VERSION_FILE;
 
 exports.pool = function pool() {
-    console.log("pool kutsuttiin");
-
 	if (!fs.existsSync(filename)) {
 		return "File not found";
 	}
