@@ -2,8 +2,29 @@
 stats
 =====
 
-1. Something.
+Statistics for Meetin.gs.
 
-2. Something.
+Installation
+------------
 
-3. Profit \o/
+1. Configure *npm*(1).
+```
+# npm config set prefix /usr/local --global
+```
+
+2. Install dependencies and link *stats* to your *$PATH*.
+```
+# npm install
+# npm link
+```
+
+3. Copy *Upstart* configuration in place.
+```
+# cp deploy/stats.conf /etc/init
+# chmod 644 /etc/init/stats.conf
+```
+
+4. Start service.
+```
+# service stats start
+```
