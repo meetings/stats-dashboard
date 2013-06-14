@@ -2,7 +2,7 @@
 stats
 =====
 
-Statistics for Meetin.gs.
+Statistics for [Meetin.gs](http://meetin.gs/about).
 
 Installation
 ------------
@@ -24,7 +24,12 @@ Installation
 # chmod 644 /etc/init/stats.conf
 ```
 
-4. Start service.
+4. Initialize version file.
+```
+# git rev-parse <ref> > /etc/the_service_version
+```
+
+5. Start service.
 ```
 # service stats start
 ```
