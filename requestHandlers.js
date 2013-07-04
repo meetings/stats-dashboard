@@ -20,7 +20,7 @@ window.monthly_real_meeting_creators_who_were_old_users = [{"count":36,"month":"
 Output example:
 
 OUTPUT data from a function
-  {"chart":{"renderTo":"container","type":"area","zoomType":"x","spacingRight":20,"backgroundColor":"#00a0cd"},"title":{"text":"Repeat users","style":{"color":"#FFFFFF"}},"subtitle":{"text":"Source: Meetin.gs","style":{"color":"#FFFFFF"}},"xAxis":{"categories":["2012_04","2012_05","2012_06","2012_07","2012_08","2012_09","2012_10","2012_11","2012_12","2013_01","2013_02","2013_03","2013_04","2013_05"],"labels":{"style":{"color":"white"}}},"yAxis":{"title":{"text":"","style":{"color":"#FFFFFF"}},"labels":{"style":{"color":"white"}}},"tooltip":{"enabled":true},"plotOptions":{"area":{"dataLabels":{"borderWidth":0,"enabled":true,"style":{"fontWeight":"bold"}},"stacking":"normal","lineColor":"#666666","lineWidth":0,"marker":{"lineWidth":1,"lineColor":"#666666"},"fillOpacity":1}},"series":[{"color":"#6c6c6c","name":"Repeat users","data":[36,42,26,24,36,37,63,52,49,77,67,52,65,76],"dataLabels":{"x":20,"y":9,"color":"white"}}]}
+  {"chart":{"renderTo":"container","type":"area","zoomType":"x","spacingRight":20,"backgroundColor":"#00a0cd"},"title":{"text":"Repeat users","style":{"color":"#FFFFFF"}},"subtitle":{"text":"","style":{"color":"#FFFFFF"}},"xAxis":{"categories":["2012_04","2012_05","2012_06","2012_07","2012_08","2012_09","2012_10","2012_11","2012_12","2013_01","2013_02","2013_03","2013_04","2013_05"],"labels":{"style":{"color":"white"}}},"yAxis":{"title":{"text":"","style":{"color":"#FFFFFF"}},"labels":{"style":{"color":"white"}}},"tooltip":{"enabled":true},"plotOptions":{"area":{"dataLabels":{"borderWidth":0,"enabled":true,"style":{"fontWeight":"bold"}},"stacking":"normal","lineColor":"#666666","lineWidth":0,"marker":{"lineWidth":1,"lineColor":"#666666"},"fillOpacity":1}},"series":[{"color":"#6c6c6c","name":"Repeat users","data":[36,42,26,24,36,37,63,52,49,77,67,52,65,76],"dataLabels":{"x":20,"y":9,"color":"white"}}]}
 
 */
 
@@ -28,6 +28,18 @@ OUTPUT data from a function
 
 var http = require('http');
 var request = require('request');
+
+
+function shorten_to_n_items(input_array,n){
+
+  var length_of_array = input_array.length;
+
+  var output_array = input_array.splice(length_of_array-n)
+
+  return(output_array)
+
+
+}
 
 
 //parses a string formatted Jsonv file into a Json object
@@ -74,24 +86,26 @@ function repeat_users(){
                  
                }
         }  
-            
-       
+        //remove all data from arrays except last 6 months
+        old_user = shorten_to_n_items(old_user,6)
+        month = shorten_to_n_items(month,6)
+        
        repeat = {
                 chart: {
                     renderTo: 'container',
                     type: 'area',
                     zoomType: 'x',
                     spacingRight: 20,
-                    backgroundColor:'#00a0cd'
+                    backgroundColor:'#2a2a2a'
                 },
                 title: {
-                    text: 'Repeat users',
+                    text: '',
                     style: {
                       color: '#FFFFFF'
                     }
                 },
                 subtitle: {
-                    text: 'Source: Meetin.gs',
+                    text: '',
                     style: {
                       color: '#FFFFFF'
                     }
@@ -145,7 +159,7 @@ function repeat_users(){
                     }
                 },
                 series: [{ 
-                    color: '#6c6c6c',
+                    color: '#469cab',
                     name: 'Repeat users',
                     data: old_user,
                     dataLabels: {x: 20, y:9,color: 'white'}
@@ -269,24 +283,39 @@ function registered_within_three(){
          
 
       }
-        
-     //console.log(total_real_1,total_real_2)
+      
+      //remove all data from arrays except last 6 months
+      month = shorten_to_n_items(month,6)
+      total_real_11 = shorten_to_n_items(total_real_11,6)
+      total_real_10 = shorten_to_n_items(total_real_10,6)
+      total_real_9 = shorten_to_n_items(total_real_9,6)
+      total_real_8 = shorten_to_n_items(total_real_8,6)
+      total_real_7 = shorten_to_n_items(total_real_7,6)
+      total_real_6 = shorten_to_n_items(total_real_6,6)
+      total_real_5 = shorten_to_n_items(total_real_5,6)
+      total_real_4 = shorten_to_n_items(total_real_4,6)
+      total_real_3 = shorten_to_n_items(total_real_3,6)
+      total_real_2 = shorten_to_n_items(total_real_2,6)
+      total_real_1 = shorten_to_n_items(total_real_1,6)
+
+
+    
      registered = {
               chart: {
                   renderTo: 'container',
                   type: 'line',
                   zoomType: 'x',
                   spacingRight: 20,
-                  backgroundColor:'#00a0cd'
+                  backgroundColor:'#2a2a2a'
               },
               title: {
-                  text: 'Users registered within 3 months with "n" real meeting',
+                  text: '',
                    style: {
                     color: '#FFFFFF'
                   }
               },
               subtitle: {
-                  text: 'Source: Meetin.gs',
+                  text: '',
                    style: {
                     color: '#FFFFFF'
                   }
@@ -312,6 +341,13 @@ function registered_within_three(){
                   }
               }
               },
+              legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
               tooltip: {
                   enabled: true,
                   formatter: function() {
@@ -339,28 +375,28 @@ function registered_within_three(){
                   }
               },
               series: [{ 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=11',
                   data: total_real_11,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=10',
                   data: total_real_10,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=9',
                   data: total_real_9,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=8',
                   data: total_real_8,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
@@ -375,38 +411,38 @@ function registered_within_three(){
               },
               
               { 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=6',
                   data: total_real_6,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=5',
                   data: total_real_5,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },{ 
-                  color: '#acacac',
+                  color: '#469cab',
                   name: 'n=4',
                   data: total_real_4,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },{ 
-                  color: '#e370a9',
+                  color: '#469cab',
                   name: 'n=3',
                   data: total_real_3,
                   dataLabels: {x: 20, y:9,color:'white',enabled:true}
 
               },{ 
-                  color: '#f69d5e',
+                  color: '#469cab',
                   name: 'n=2',
                   data: total_real_2,
                   dataLabels: {x: 20, y:9,color:'white',enabled:true}
 
               },
-              { color: '#8cc864',
+              { color: '#469cab',
                   name: 'n=1',
                   data: total_real_1,
                   dataLabels: {x: -16, y:15,color:'white',enabled:true},
@@ -529,22 +565,28 @@ function reg_organizers(){
         
 
     }
+
+    five_real_meetings_by_month = shorten_to_n_items(five_real_meetings_by_month,6)
+    month = shorten_to_n_items(month,6)
+    data1 = shorten_to_n_items(data1,6)
+    data2 = shorten_to_n_items(data2,6)
+
     organizers = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: 'Registered organizers, cumulative',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -573,6 +615,13 @@ function reg_organizers(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -585,6 +634,7 @@ function reg_organizers(){
                     dataLabels: {
                         borderWidth: 0,
                         enabled: true,
+                        color: 'white',
                         style: {
                         fontWeight:'bold'
                          }
@@ -600,16 +650,16 @@ function reg_organizers(){
                 }
             },
             series: [{
-                color: '#d6edf5',
+                color: '#469cab',
                 name: 'organized five',
                 data: five_real_meetings_by_month,
-                dataLabels: {x: 0, y:0,color: 'black'}
-            },{ color: '#7bc8e1',
+                dataLabels: {x: 0, y:0,color: 'white'}
+            },{ color: '#469cab',
                 name: 'organized three',
                 data: data1,
                 dataLabels: {x: -13, y:9,color: 'white'}
             },{ 
-                color: '#6c6c6c',
+                color: '#469cab',
                 name: 'organized one',
                 data: data2,
                 dataLabels: {x: 20, y:9,color: 'white'}
@@ -797,24 +847,33 @@ function real_user_registrations(){
     }
    // console.log(a_real_meeting_by_month,three_real_meetings_by_month,five_real_meetings_by_month )
 
+
+   month = shorten_to_n_items(month,6)
+   five_real_meetings_by_month = shorten_to_n_items(five_real_meetings_by_month,6)
+    data_1 = shorten_to_n_items(data_1,6)
+    data_2 = shorten_to_n_items(data_2,6)
+    data_3 = shorten_to_n_items(data_3,6)
+    data_4 = shorten_to_n_items(data_4,6)
+
+
     real_user_reg = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd',
+                backgroundColor:'#2a2a2a',
 
             },
             title: {
-                text: 'Real user registrations, cumulative',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
 
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -839,6 +898,13 @@ function real_user_registrations(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -866,36 +932,36 @@ function real_user_registrations(){
                 }
             },
             series: [{ 
-                color: '#e7e7e7',
+                color: '#469cab',
                 name: 'Organized 5',
                 data: five_real_meetings_by_month,
                 dataLabels: {x: -20, y:-9,enabled: true,
-                    color: 'black'},
+                    color: 'white'},
 
 
             },{ 
-                color: '#acacac',
+                color: '#469cab',
                 name: 'Organized 3',
                 data: data_2,
                 dataLabels: {x: 0, y:0,enabled: true,
-                    color: 'black'}
+                    color: 'white'}
 
             },{ 
-                color: '#d6edf5',
+                color: '#469cab',
                 name: 'Organized 1',
                 data: data_1,
                 dataLabels: {x: 20, y:9,enabled: true,
-                    color: 'black'}
+                    color: 'white'}
 
             },{ 
-                color: '#7bc8e1',
+                color: '#469cab',
                 name: 'Participant',
                 data: data_4,
                 dataLabels: {x: 20, y:9,enabled: true,
                     color: 'white'}
 
             },
-            { color: '#6c6c6c',
+            { color: '#469cab',
                 name: 'tested',
                 data: data_3,
                 dataLabels: {x: 0, y:0,enabled: true,
@@ -980,6 +1046,9 @@ function percent_of_new_real_meeting(){
     //  console.log(parseFloat((100 * old_creator[i]/first_real_meeting_creator[i]).toFixed(0)))
       
     }
+
+    month = shorten_to_n_items(month,6)
+    percentage = shorten_to_n_items(percentage,6)
     //console.log(percentage)
 
     percent_of_new_real_result = {
@@ -988,16 +1057,16 @@ function percent_of_new_real_meeting(){
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: '% of new real meeting organizers who were formerly meeting participants',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -1025,6 +1094,13 @@ function percent_of_new_real_meeting(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -1053,7 +1129,7 @@ function percent_of_new_real_meeting(){
                 }
             },
             series: [
-            { color: '#6c6c6c',
+            { color: '#469cab',
                 name: 'Repeat organizer',
                 data: percentage,
                 dataLabels: {x: -16, y:15,color: 'white'}
@@ -1128,22 +1204,26 @@ function new_registered_users_each_month(){
   }
   
 
+  tos_acceptions = shorten_to_n_items(tos_acceptions,6)
+  new_meetings_users = shorten_to_n_items(new_meetings_users,6)
+  month = shorten_to_n_items(month,6)
+
   new_registered_users_result = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: 'New registered users each month',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -1170,6 +1250,13 @@ function new_registered_users_each_month(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -1197,13 +1284,13 @@ function new_registered_users_each_month(){
                 }
             },
             series: [{ 
-                color: '#7bc8e1',
+                color: '#469cab',
                 name: 'New organizers',
                 data: tos_acceptions,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             },
-            { color: '#6c6c6c',
+            { color: '#469cab',
                 name: 'New participants',
                 data: new_meetings_users,
                 dataLabels: {x: -16, y:15,color: 'white'}
@@ -1357,7 +1444,12 @@ function monthly_sent_invitations(){
 
     }
    // console.log(sent_invitations_to_existing_users)
-    
+    month = shorten_to_n_items(month,6)
+
+    sent_friend_invitations = shorten_to_n_items(sent_friend_invitations,6)
+    sent_invitations_to_existing_users = shorten_to_n_items(sent_invitations_to_existing_users,6)
+    monthly_sent_invitations_to_users_with_no_real_meetings_created = shorten_to_n_items(monthly_sent_invitations_to_users_with_no_real_meetings_created,6)
+    sent_invitations_to_new_users = shorten_to_n_items(sent_invitations_to_new_users,6)
 
     monthly_sent_result = {
             chart: {
@@ -1365,16 +1457,16 @@ function monthly_sent_invitations(){
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: 'Monthly sent meeting invitations',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -1400,6 +1492,13 @@ function monthly_sent_invitations(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -1427,25 +1526,25 @@ function monthly_sent_invitations(){
                 }
             },
             series: [{ 
-                color: '#acacac',
+                color: '#469cab',
                 name: 'sent friend invitations',
                 data: sent_friend_invitations,
-                dataLabels: {x: 20, y:9},
-                dataLabels: {x: 0, y:-8}
+                
+                dataLabels: {x: 0, y:-8,color: 'white'}
 
             },
-            { color: '#d6edf5',
+            { color: '#469cab',
                 name: 'sent invitations to existing users',
                 data: sent_invitations_to_existing_users,
-                dataLabels: {x: -16, y:15}
+                dataLabels: {x: -16, y:15,color: 'white'}
             },{ 
-                color: '#7bc8e1',
+                color: '#469cab',
                 name: 'sent_invitations_to_users_with_no_real_meetings',
                 data: monthly_sent_invitations_to_users_with_no_real_meetings_created,
-                dataLabels: {x: 20, y:9}
+                dataLabels: {x: 20, y:9,color: 'white'}
 
             },{
-                color: '#6c6c6c',
+                color: '#469cab',
                 name: 'sent invitations to new users',
                 data: sent_invitations_to_new_users,
                 dataLabels: {x: 0, y:0,color: 'white'}
@@ -1525,24 +1624,28 @@ function monthly_organizers_of_real_meetings(){
 
 
  if(monthly_first_real_meeting_creator.length == old_meeting_creator.length){
-   
-   
+    
+    old_meeting_creator = shorten_to_n_items(old_meeting_creator,6)
+    month = shorten_to_n_items(month,6)
+    monthly_first_real_meeting_creator = shorten_to_n_items(monthly_first_real_meeting_creator,6)
+
+    
     monthly_organizers_result = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: 'Monthly organizers of real meetings',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -1569,6 +1672,13 @@ function monthly_organizers_of_real_meetings(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -1596,12 +1706,12 @@ function monthly_organizers_of_real_meetings(){
                 }
             },
             series: [
-            { color: '#6c6c6c',
+            { color: '#469cab',
                 name: 'Repeat organizer',
                 data: old_meeting_creator,
                 dataLabels: {x: -16, y:15,color: 'white'}
             },{ 
-                color: '#7bc8e1',
+                color: '#469cab',
                 name: 'First real meeting',
                 data: monthly_first_real_meeting_creator,
                 dataLabels: {x: 20, y:9,color: 'white'}
@@ -1697,7 +1807,9 @@ function monthly_new_organizers_by_channel(){
 
 
  if(months.length == seats2meet.length){
-   
+    seats2meet = shorten_to_n_items(seats2meet,6)
+    any_partner = shorten_to_n_items(any_partner,6)
+    months = shorten_to_n_items(months,6)
    
     monthly_new_organizers_results = {
             chart: {
@@ -1705,16 +1817,16 @@ function monthly_new_organizers_by_channel(){
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: 'Meetings created, cumulative',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -1741,6 +1853,13 @@ function monthly_new_organizers_by_channel(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -1768,12 +1887,12 @@ function monthly_new_organizers_by_channel(){
                 }
             },
             series: [
-            { color: '#6c6c6c',
+            { color: '#469cab',
                 name: 'Seats2meet',
                 data: seats2meet,
                 dataLabels: {x: 0, y:0,color: 'white'}
             },{ 
-                color: '#7bc8e1',
+                color: '#469cab',
                 name: 'Meetin.gs',
                 data: any_partner,
                 dataLabels: {x: 20, y:9,color: 'white'}
@@ -1866,7 +1985,9 @@ function meetings_created_cum(){
 
     }
 
-
+    total_real_meetings_created = shorten_to_n_items(total_real_meetings_created,6)
+    draft_and_test_meetings = shorten_to_n_items(draft_and_test_meetings,6)
+    month = shorten_to_n_items(month,6)
    
     meetings_cum_results = {
             chart: {
@@ -1874,16 +1995,16 @@ function meetings_created_cum(){
                 type: 'area',
                 zoomType: 'x',
                 spacingRight: 20,
-                backgroundColor:'#00a0cd'
+                backgroundColor:'#2a2a2a'
             },
             title: {
-                text: 'Meetings created, cumulative',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
             },
             subtitle: {
-                text: 'Source: Meetin.gs',
+                text: '',
                 style: {
                   color: '#FFFFFF'
                 }
@@ -1910,6 +2031,13 @@ function meetings_created_cum(){
                 }
             }
             },
+            legend: {
+                      
+            itemStyle: {
+               
+                color: '#ffffff'
+            }
+        },
             tooltip: {
                 enabled: true,
                 formatter: function() {
@@ -1937,13 +2065,13 @@ function meetings_created_cum(){
                 }
             },
             series: [{ 
-                color: '#7bc8e1',
+                color: '#469cab',
                 name: 'Real meetings',
                 data: total_real_meetings_created,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             },
-            { color: '#6c6c6c',
+            { color: '#469cab',
                 name: 'Draft and test meetings',
                 data: draft_and_test_meetings,
                 dataLabels: {x: -16, y:15,color: 'white'}
