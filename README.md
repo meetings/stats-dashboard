@@ -7,29 +7,26 @@ Statistics for [Meetin.gs](http://meetin.gs/about).
 Installation
 ------------
 
-1. Configure *npm*(1).
+Manual installation instructions follow.
+
+1. Configure *npm*(1), install dependencies and make *stats* available.
 ```
 # npm config set prefix /usr/local --global
-```
-
-2. Install dependencies and link *stats* to your *$PATH*.
-```
 # npm install
 # npm link
 ```
 
-3. Copy *Upstart* configuration in place.
+2. Copy *Upstart* configuration in place.
 ```
-# cp deploy/stats.conf /etc/init
-# chmod 644 /etc/init/stats.conf
+# install -m 0644 autodeploy/stats.conf /etc/init
 ```
 
-4. Initialize version file.
+3. Initialize version file.
 ```
 # git rev-parse <ref> > /etc/the_service_version
 ```
 
-5. Start service.
+4. Start service.
 ```
 # service stats start
 ```
