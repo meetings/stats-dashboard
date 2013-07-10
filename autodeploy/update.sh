@@ -2,8 +2,6 @@
 
 DEPLOYDIR=autodeploy
 
-. $DEPLOYDIR/common
-
 git checkout master
 git clean -f
 git reset --hard HEAD
@@ -12,6 +10,8 @@ git tag | xargs git tag -d
 git fetch --tags
 
 npm update
+
+. $DEPLOYDIR/common
 
 activate_and_start
 
