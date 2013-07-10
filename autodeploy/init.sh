@@ -9,7 +9,7 @@ npm link
 
 install -m 0644 $DEPLOYDIR/$INTENT.conf /etc/init
 
-. $DEPLOYDIR/common
+. $DEPLOYDIR/common.sh
 
 activate_and_start
 

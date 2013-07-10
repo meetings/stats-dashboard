@@ -11,7 +11,7 @@ git fetch --tags
 
 npm update
 
-. $DEPLOYDIR/common
+. $DEPLOYDIR/common.sh
 
 activate_and_start
 
