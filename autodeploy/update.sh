@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DEPLOYDIR=autodeploy
-
 git checkout master
 git clean -f
 git reset --hard HEAD
