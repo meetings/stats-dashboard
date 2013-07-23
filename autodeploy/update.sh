@@ -1,8 +1,8 @@
 #!/bin/bash
 
-git checkout master
 git clean -f
 git reset --hard HEAD
+git checkout master
 git pull
 git tag | xargs git tag -d
 git fetch --tags

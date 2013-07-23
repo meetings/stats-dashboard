@@ -2,6 +2,7 @@
  */
 
 var fs = require("fs");
+var os = require("os");
 
 var intent = "stats";
 var filename = process.env.VERSION_FILE;
@@ -11,13 +12,9 @@ exports.pool = function pool() {
 		return "File not found";
 	}
 
-    fs.readFile(filename, {encoding: 'utf8'}, function(err, data) {
-        if (err) {
-            return 'File cannot be read';
-        }
+    var data = fs.readFileSync(filename, {encoding: 'utf8'});
 
-        return getPoolName() + ' ' + data;
-    })
+    return getPoolName() + ' ' + data;
 }
 
 function getPoolName() {
