@@ -11,7 +11,18 @@ exports.pool = function pool() {
 		return "File not found";
 	}
 
-	var version = fs.readFileSync(filename, {encoding: "utf8"});
+    fs.readFile(filename, {encoding: 'utf8'}, function(err, data) {
+        if (err) {
+            return 'File cannot be read';
+        }
 
-    return intent + " " + version;
+        return getPoolName() + ' ' + data;
+    })
+}
+
+function getPoolName() {
+    var prefix = os.hostname().split('-')[0];
+    if (prefix === 'live')  prefix = 'stable';
+    if (prefix === 'alpha') prefix = 'beta';
+    return prefix + '-' + intent;
 }
