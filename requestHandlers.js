@@ -22,6 +22,13 @@ Output example:
 OUTPUT data from a function
   {"chart":{"renderTo":"container","type":"area","zoomType":"x","spacingRight":20,"backgroundColor":"#00a0cd"},"title":{"text":"Repeat users","style":{"color":"#FFFFFF"}},"subtitle":{"text":"","style":{"color":"#FFFFFF"}},"xAxis":{"categories":["2012_04","2012_05","2012_06","2012_07","2012_08","2012_09","2012_10","2012_11","2012_12","2013_01","2013_02","2013_03","2013_04","2013_05"],"labels":{"style":{"color":"white"}}},"yAxis":{"title":{"text":"","style":{"color":"#FFFFFF"}},"labels":{"style":{"color":"white"}}},"tooltip":{"enabled":true},"plotOptions":{"area":{"dataLabels":{"borderWidth":0,"enabled":true,"style":{"fontWeight":"bold"}},"stacking":"normal","lineColor":"#666666","lineWidth":0,"marker":{"lineWidth":1,"lineColor":"#666666"},"fillOpacity":1}},"series":[{"color":"#6c6c6c","name":"Repeat users","data":[36,42,26,24,36,37,63,52,49,77,67,52,65,76],"dataLabels":{"x":20,"y":9,"color":"white"}}]}
 
+Color scheme from dark to light:
+#0A4E7D
+#346A90
+#1E7CBE
+#489DD9
+#66A9D9
+
 */
 
 
@@ -159,7 +166,7 @@ function repeat_users(){
                     }
                 },
                 series: [{ 
-                    color: '#469cab',
+                    color: '#0D5487',
                     name: 'Repeat users',
                     data: old_user,
                     dataLabels: {x: 20, y:9,color: 'white'}
@@ -375,28 +382,28 @@ function registered_within_three(){
                   }
               },
               series: [{ 
-                  color: '#469cab',
+                  color: '#B2DFFF',
                   name: 'n=11',
                   data: total_real_11,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#469cab',
+                  color: '#A4D9FF',
                   name: 'n=10',
                   data: total_real_10,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#469cab',
+                  color: '#8AB7D7',
                   name: 'n=9',
                   data: total_real_9,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },
               { 
-                  color: '#469cab',
+                  color: '#4F95C7',
                   name: 'n=8',
                   data: total_real_8,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
@@ -418,31 +425,31 @@ function registered_within_three(){
 
               },
               { 
-                  color: '#469cab',
+                  color: '#6FAFDC',
                   name: 'n=5',
                   data: total_real_5,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },{ 
-                  color: '#469cab',
+                  color: '#4DA1DC',
                   name: 'n=4',
                   data: total_real_4,
                   dataLabels: {x: 0, y:20,color:'white',enabled:true}
 
               },{ 
-                  color: '#469cab',
+                  color: '#1E7CBE',
                   name: 'n=3',
                   data: total_real_3,
                   dataLabels: {x: 20, y:9,color:'white',enabled:true}
 
               },{ 
-                  color: '#469cab',
+                  color: '#326D96',
                   name: 'n=2',
                   data: total_real_2,
                   dataLabels: {x: 20, y:9,color:'white',enabled:true}
 
               },
-              { color: '#469cab',
+              { color: '#0D5487',
                   name: 'n=1',
                   data: total_real_1,
                   dataLabels: {x: -16, y:15,color:'white',enabled:true},
@@ -650,16 +657,16 @@ function reg_organizers(){
                 }
             },
             series: [{
-                color: '#469cab',
+                color: '#1E7CBE',
                 name: 'organized five',
                 data: five_real_meetings_by_month,
                 dataLabels: {x: 0, y:0,color: 'white'}
-            },{ color: '#469cab',
+            },{ color: '#326D96',
                 name: 'organized three',
                 data: data1,
                 dataLabels: {x: -13, y:9,color: 'white'}
             },{ 
-                color: '#469cab',
+                color: '#0D5487',
                 name: 'organized one',
                 data: data2,
                 dataLabels: {x: 20, y:9,color: 'white'}
@@ -932,7 +939,7 @@ function real_user_registrations(){
                 }
             },
             series: [{ 
-                color: '#469cab',
+                color: '#6FAFDC',
                 name: 'Organized 5',
                 data: five_real_meetings_by_month,
                 dataLabels: {x: -20, y:-9,enabled: true,
@@ -940,28 +947,28 @@ function real_user_registrations(){
 
 
             },{ 
-                color: '#469cab',
+                color: '#4DA1DC',
                 name: 'Organized 3',
                 data: data_2,
                 dataLabels: {x: 0, y:0,enabled: true,
                     color: 'white'}
 
             },{ 
-                color: '#469cab',
+                color: '#1E7CBE',
                 name: 'Organized 1',
                 data: data_1,
                 dataLabels: {x: 20, y:9,enabled: true,
                     color: 'white'}
 
             },{ 
-                color: '#469cab',
+                color: '#326D96',
                 name: 'Participant',
                 data: data_4,
                 dataLabels: {x: 20, y:9,enabled: true,
                     color: 'white'}
 
             },
-            { color: '#469cab',
+            { color: '#0D5487',
                 name: 'tested',
                 data: data_3,
                 dataLabels: {x: 0, y:0,enabled: true,
@@ -1129,7 +1136,7 @@ function percent_of_new_real_meeting(){
                 }
             },
             series: [
-            { color: '#469cab',
+            { color: '#0D5487',
                 name: 'Repeat organizer',
                 data: percentage,
                 dataLabels: {x: -16, y:15,color: 'white'}
@@ -1284,13 +1291,13 @@ function new_registered_users_each_month(){
                 }
             },
             series: [{ 
-                color: '#469cab',
+                color: '#326D96',
                 name: 'New organizers',
                 data: tos_acceptions,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             },
-            { color: '#469cab',
+            { color: '#0D5487',
                 name: 'New participants',
                 data: new_meetings_users,
                 dataLabels: {x: -16, y:15,color: 'white'}
@@ -1526,25 +1533,25 @@ function monthly_sent_invitations(){
                 }
             },
             series: [{ 
-                color: '#469cab',
+                color: '#4DA1DC',
                 name: 'sent friend invitations',
                 data: sent_friend_invitations,
                 
                 dataLabels: {x: 0, y:-8,color: 'white'}
 
             },
-            { color: '#469cab',
+            { color: '#1E7CBE',
                 name: 'sent invitations to existing users',
                 data: sent_invitations_to_existing_users,
                 dataLabels: {x: -16, y:15,color: 'white'}
             },{ 
-                color: '#469cab',
+                color: '#326D96',
                 name: 'sent_invitations_to_users_with_no_real_meetings',
                 data: monthly_sent_invitations_to_users_with_no_real_meetings_created,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             },{
-                color: '#469cab',
+                color: '#0D5487',
                 name: 'sent invitations to new users',
                 data: sent_invitations_to_new_users,
                 dataLabels: {x: 0, y:0,color: 'white'}
@@ -1706,12 +1713,12 @@ function monthly_organizers_of_real_meetings(){
                 }
             },
             series: [
-            { color: '#469cab',
+            { color: '#326D96',
                 name: 'Repeat organizer',
                 data: old_meeting_creator,
                 dataLabels: {x: -16, y:15,color: 'white'}
             },{ 
-                color: '#469cab',
+                color: '#0D5487',
                 name: 'First real meeting',
                 data: monthly_first_real_meeting_creator,
                 dataLabels: {x: 20, y:9,color: 'white'}
@@ -1887,12 +1894,12 @@ function monthly_new_organizers_by_channel(){
                 }
             },
             series: [
-            { color: '#469cab',
+            { color: '#326D96',
                 name: 'Seats2meet',
                 data: seats2meet,
                 dataLabels: {x: 0, y:0,color: 'white'}
             },{ 
-                color: '#469cab',
+                color: '#0D5487',
                 name: 'Meetin.gs',
                 data: any_partner,
                 dataLabels: {x: 20, y:9,color: 'white'}
@@ -2065,13 +2072,13 @@ function meetings_created_cum(){
                 }
             },
             series: [{ 
-                color: '#469cab',
+                color: '#326D96',
                 name: 'Real meetings',
                 data: total_real_meetings_created,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             },
-            { color: '#469cab',
+            { color: '#0D5487',
                 name: 'Draft and test meetings',
                 data: draft_and_test_meetings,
                 dataLabels: {x: -16, y:15,color: 'white'}
