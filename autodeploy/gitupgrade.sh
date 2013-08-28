@@ -33,6 +33,7 @@ git_upgrade() {
     # fetch and merge changes.
     #
     git checkout --force master
+    git clean --force
     git pull --all
 
     # If there is no remote branch for this machines
