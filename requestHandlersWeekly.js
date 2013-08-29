@@ -15,7 +15,7 @@ Each Meetin.gs highchart visualization is a different function:
 Input example:
 INPUT data from URI-address
 
-window.monthly_real_meeting_creators_who_were_old_users = [{"count":36,"month":"2012_04"},{"count":42,"month":"2012_05"},{"count":26,"month":"2012_06"},{"count":24,"month":"2012_07"},{"count":36,"month":"2012_08"},{"count":37,"month":"2012_09"},{"count":63,"month":"2012_10"},{"count":52,"month":"2012_11"},{"count":49,"month":"2012_12"},{"count":77,"month":"2013_01"},{"count":67,"month":"2013_02"},{"count":52,"month":"2013_03"},{"count":65,"month":"2013_04"},{"count":76,"month":"2013_05"}];
+window.weekly_real_meeting_creators_who_were_old_users = [{"count":36,"week":"2012_04"},{"count":42,"week":"2012_05"},{"count":26,"week":"2012_06"},{"count":24,"week":"2012_07"},{"count":36,"week":"2012_08"},{"count":37,"week":"2012_09"},{"count":63,"week":"2012_10"},{"count":52,"week":"2012_11"},{"count":49,"week":"2012_12"},{"count":77,"week":"2013_01"},{"count":67,"week":"2013_02"},{"count":52,"week":"2013_03"},{"count":65,"week":"2013_04"},{"count":76,"week":"2013_05"}];
 
 Output example:
 
@@ -66,9 +66,9 @@ function parse_json_string(json_string){
 
 var repeat = ""
 function repeat_users(){
- var url = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_real_meeting_creators_who_were_old_users.jsonv"
+ var url = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_real_meeting_creators_who_were_old_users.jsonv"
   var old_user = [];
-  var month = [];
+  var week = [];
 
   request(url, function(error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -86,16 +86,16 @@ function repeat_users(){
                 old_user.push(obj[prop]);
 
               }
-              if (prop == "month"){
-                month.push(obj[prop]);
+              if (prop == "week"){
+                week.push(obj[prop]);
 
                   }
 
                }
         }
-        //remove all data from arrays except last 6 months
+        //remove all data from arrays except last 6 weeks
         old_user = shorten_to_n_items(old_user,6)
-        month = shorten_to_n_items(month,6)
+        week = shorten_to_n_items(week,6)
 
        repeat = {
                 chart: {
@@ -118,7 +118,7 @@ function repeat_users(){
                     }
                 },
                 xAxis: {
-                    categories: month,
+                    categories: week,
 
                     labels: {
                     style: {
@@ -187,14 +187,14 @@ return JSON.stringify(repeat)
 
 var registered =""
 function registered_within_three(){
-    var url = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/combined_monthly_users_with_n_real_created_as_any_user_within_a_3_month_window.jsonv"
+    var url = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/combined_weekly_users_with_n_real_created_as_any_user_within_a_3_week_window.jsonv"
     var total_meetings_created = [];
 
     var total_real_meetings_created =[];
 
     var draft_and_test_meetings = [];
 
-    var month = [];
+    var week = [];
 
     var total_real_1 = [];
     var total_real_2 = [];
@@ -276,8 +276,8 @@ function registered_within_three(){
 
 
 
-            if (prop == "month"){
-              month.push(obj[prop]);
+            if (prop == "week"){
+              week.push(obj[prop]);
 
             }
 
@@ -291,8 +291,8 @@ function registered_within_three(){
 
       }
 
-      //remove all data from arrays except last 6 months
-      month = shorten_to_n_items(month,6)
+      //remove all data from arrays except last 6 weeks
+      week = shorten_to_n_items(week,6)
       total_real_11 = shorten_to_n_items(total_real_11,6)
       total_real_10 = shorten_to_n_items(total_real_10,6)
       total_real_9 = shorten_to_n_items(total_real_9,6)
@@ -328,7 +328,7 @@ function registered_within_three(){
                   }
               },
               xAxis: {
-                  categories: month,
+                  categories: week,
                   labels: {
                   style: {
                       color: 'white'
@@ -468,21 +468,21 @@ return JSON.stringify(registered)
 }
 
 var organizers =""
-var a_real_meeting_by_month = [];
+var a_real_meeting_by_week = [];
 
-var three_real_meetings_by_month =[];
+var three_real_meetings_by_week =[];
 
-var five_real_meetings_by_month = [];
-var month = [];
+var five_real_meetings_by_week = [];
+var week = [];
 var data1 = [];
 var data2= [];
 var data3= [];
 var data4 = [];
 
 function reg_organizers(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_created_a_real_meeting_by_month.jsonv"
-  var url2 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_created_3_real_meetings_by_month.jsonv"
-  var url3 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_created_5_real_meetings_by_month.jsonv"
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_created_a_real_meeting_by_week.jsonv"
+  var url2 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_created_3_real_meetings_by_week.jsonv"
+  var url3 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_created_5_real_meetings_by_week.jsonv"
 
 
   var with_agenda_an_ap =[];
@@ -492,7 +492,7 @@ function reg_organizers(){
 
   request(url1, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        a_real_meeting_by_month = [];
+        a_real_meeting_by_week = [];
 
         json_body = parse_json_string(body)
           for (var key in json_body) {
@@ -500,7 +500,7 @@ function reg_organizers(){
             for (var prop in obj) {
 
               if (prop == "count"){
-                a_real_meeting_by_month.push(obj[prop]);
+                a_real_meeting_by_week.push(obj[prop]);
 
               }
 
@@ -514,8 +514,8 @@ function reg_organizers(){
   });
   request(url2, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        three_real_meetings_by_month =[];
-        month = [];
+        three_real_meetings_by_week =[];
+        week = [];
 
         json_body = parse_json_string(body)
         for (var key in json_body) {
@@ -523,12 +523,12 @@ function reg_organizers(){
           for (var prop in obj) {
 
             if (prop == "count"){
-              three_real_meetings_by_month.push(obj[prop]);
+              three_real_meetings_by_week.push(obj[prop]);
 
             }
 
-            if (prop == "month"){
-                month.push(obj[prop]);
+            if (prop == "week"){
+                week.push(obj[prop]);
 
               }
 
@@ -541,7 +541,7 @@ function reg_organizers(){
 
   request(url3, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      five_real_meetings_by_month = [];
+      five_real_meetings_by_week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -549,7 +549,7 @@ function reg_organizers(){
         for (var prop in obj) {
 
           if (prop == "count"){
-            five_real_meetings_by_month.push(obj[prop]);
+            five_real_meetings_by_week.push(obj[prop]);
 
           }
 
@@ -560,21 +560,21 @@ function reg_organizers(){
     }
 
   });
-  if(a_real_meeting_by_month.length == three_real_meetings_by_month.length && three_real_meetings_by_month.length ==five_real_meetings_by_month.length && a_real_meeting_by_month.length == five_real_meetings_by_month.length){
-   //console.log(a_real_meeting_by_month,three_real_meetings_by_month,five_real_meetings_by_month)
-    for (var i = 0; i < a_real_meeting_by_month.length; i++){
+  if(a_real_meeting_by_week.length == three_real_meetings_by_week.length && three_real_meetings_by_week.length ==five_real_meetings_by_week.length && a_real_meeting_by_week.length == five_real_meetings_by_week.length){
+   //console.log(a_real_meeting_by_week,three_real_meetings_by_week,five_real_meetings_by_week)
+    for (var i = 0; i < a_real_meeting_by_week.length; i++){
 
 
-      data1[i] = three_real_meetings_by_month[i]-five_real_meetings_by_month[i];
+      data1[i] = three_real_meetings_by_week[i]-five_real_meetings_by_week[i];
 
 
-      data2[i] = a_real_meeting_by_month[i] - data1[i] - five_real_meetings_by_month[i];
+      data2[i] = a_real_meeting_by_week[i] - data1[i] - five_real_meetings_by_week[i];
 
 
     }
 
-    five_real_meetings_by_month = shorten_to_n_items(five_real_meetings_by_month,6)
-    month = shorten_to_n_items(month,6)
+    five_real_meetings_by_week = shorten_to_n_items(five_real_meetings_by_week,6)
+    week = shorten_to_n_items(week,6)
     data1 = shorten_to_n_items(data1,6)
     data2 = shorten_to_n_items(data2,6)
 
@@ -599,7 +599,7 @@ function reg_organizers(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
                 style: {
                   color: '#FFFFFF'
                 },
@@ -659,7 +659,7 @@ function reg_organizers(){
             series: [{
                 color: '#1E7CBE',
                 name: 'organized five',
-                data: five_real_meetings_by_month,
+                data: five_real_meetings_by_week,
                 dataLabels: {x: 0, y:0,color: 'white'}
             },{ color: '#326D96',
                 name: 'organized three',
@@ -683,8 +683,8 @@ function reg_organizers(){
 return JSON.stringify(organizers)
 }
 
-var users_by_month = [];
-var users_who_have_been_invited_to_or_created_a_real_meeting_by_month =[];
+var users_by_week = [];
+var users_who_have_been_invited_to_or_created_a_real_meeting_by_week =[];
 var draft_and_test_meetings = [];
 
 var real_user_reg=""
@@ -696,11 +696,11 @@ var data_4 = []
 
 
 function real_user_registrations(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_created_a_real_meeting_by_month.jsonv"
-  var url2 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_created_3_real_meetings_by_month.jsonv"
-  var url3 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_created_5_real_meetings_by_month.jsonv"
-  var url4 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_who_have_been_invited_to_or_created_a_real_meeting_by_month.jsonv"
-  var url5 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_users_by_month.jsonv"
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_created_a_real_meeting_by_week.jsonv"
+  var url2 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_created_3_real_meetings_by_week.jsonv"
+  var url3 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_created_5_real_meetings_by_week.jsonv"
+  var url4 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_who_have_been_invited_to_or_created_a_real_meeting_by_week.jsonv"
+  var url5 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_users_by_week.jsonv"
 
   var with_agenda_an_ap =[];
   var with_agenda = [];
@@ -708,7 +708,7 @@ function real_user_registrations(){
 
   request(url1, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        a_real_meeting_by_month = [];
+        a_real_meeting_by_week = [];
 
         json_body = parse_json_string(body)
     for (var key in json_body) {
@@ -716,7 +716,7 @@ function real_user_registrations(){
       for (var prop in obj) {
 
         if (prop == "count"){
-          a_real_meeting_by_month.push(obj[prop]);
+          a_real_meeting_by_week.push(obj[prop]);
 
         }
 
@@ -732,8 +732,8 @@ function real_user_registrations(){
 
   request(url2, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        three_real_meetings_by_month =[];
-        month = [];
+        three_real_meetings_by_week =[];
+        week = [];
 
         json_body = parse_json_string(body)
 
@@ -742,12 +742,12 @@ function real_user_registrations(){
             for (var prop in obj) {
 
               if (prop == "count"){
-                three_real_meetings_by_month.push(obj[prop]);
+                three_real_meetings_by_week.push(obj[prop]);
 
               }
 
-              if (prop == "month"){
-                  month.push(obj[prop]);
+              if (prop == "week"){
+                  week.push(obj[prop]);
 
                 }
 
@@ -760,7 +760,7 @@ function real_user_registrations(){
 
   request(url3, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      five_real_meetings_by_month = [];
+      five_real_meetings_by_week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -768,7 +768,7 @@ function real_user_registrations(){
          for (var prop in obj) {
 
             if (prop == "count"){
-              five_real_meetings_by_month.push(obj[prop]);
+              five_real_meetings_by_week.push(obj[prop]);
 
             }
 
@@ -780,7 +780,7 @@ function real_user_registrations(){
 
   request(url4, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      users_who_have_been_invited_to_or_created_a_real_meeting_by_month = [];
+      users_who_have_been_invited_to_or_created_a_real_meeting_by_week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -788,7 +788,7 @@ function real_user_registrations(){
         for (var prop in obj) {
 
           if (prop == "count"){
-            users_who_have_been_invited_to_or_created_a_real_meeting_by_month.push(obj[prop]);
+            users_who_have_been_invited_to_or_created_a_real_meeting_by_week.push(obj[prop]);
 
           }
 
@@ -800,7 +800,7 @@ function real_user_registrations(){
 
   request(url5, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      users_by_month = [];
+      users_by_week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -808,7 +808,7 @@ function real_user_registrations(){
         for (var prop in obj) {
 
           if (prop == "count"){
-            users_by_month.push(obj[prop]);
+            users_by_week.push(obj[prop]);
 
           }
 
@@ -820,43 +820,43 @@ function real_user_registrations(){
   });
 
 
-  if(a_real_meeting_by_month.length == three_real_meetings_by_month.length && three_real_meetings_by_month.length == five_real_meetings_by_month.length && a_real_meeting_by_month.length == five_real_meetings_by_month.length&& a_real_meeting_by_month.length == users_who_have_been_invited_to_or_created_a_real_meeting_by_month.length && a_real_meeting_by_month.length == users_by_month.length){
-   // console.log(a_real_meeting_by_month.length,three_real_meetings_by_month.length,five_real_meetings_by_month.length,users_by_month.length,users_who_have_been_invited_to_or_created_a_real_meeting_by_month.length )
-    for (var i = 0; i < users_by_month.length; i++){
+  if(a_real_meeting_by_week.length == three_real_meetings_by_week.length && three_real_meetings_by_week.length == five_real_meetings_by_week.length && a_real_meeting_by_week.length == five_real_meetings_by_week.length&& a_real_meeting_by_week.length == users_who_have_been_invited_to_or_created_a_real_meeting_by_week.length && a_real_meeting_by_week.length == users_by_week.length){
+   // console.log(a_real_meeting_by_week.length,three_real_meetings_by_week.length,five_real_meetings_by_week.length,users_by_week.length,users_who_have_been_invited_to_or_created_a_real_meeting_by_week.length )
+    for (var i = 0; i < users_by_week.length; i++){
 
-      data_3[i] = users_by_month[i]-users_who_have_been_invited_to_or_created_a_real_meeting_by_month[i];
-
-
-
-    }
-    for (var i = 0; i < users_who_have_been_invited_to_or_created_a_real_meeting_by_month.length; i++){
-
-      data_4[i] = users_who_have_been_invited_to_or_created_a_real_meeting_by_month[i]-a_real_meeting_by_month[i];
+      data_3[i] = users_by_week[i]-users_who_have_been_invited_to_or_created_a_real_meeting_by_week[i];
 
 
 
     }
+    for (var i = 0; i < users_who_have_been_invited_to_or_created_a_real_meeting_by_week.length; i++){
 
-    for (var i = 0; i < a_real_meeting_by_month.length; i++){
-
-      data_1[i] = a_real_meeting_by_month[i]-three_real_meetings_by_month[i];
+      data_4[i] = users_who_have_been_invited_to_or_created_a_real_meeting_by_week[i]-a_real_meeting_by_week[i];
 
 
 
     }
 
-    for (var i = 0; i < three_real_meetings_by_month.length; i++){
+    for (var i = 0; i < a_real_meeting_by_week.length; i++){
 
-      data_2[i] = three_real_meetings_by_month[i]-five_real_meetings_by_month[i];
+      data_1[i] = a_real_meeting_by_week[i]-three_real_meetings_by_week[i];
 
 
 
     }
-   // console.log(a_real_meeting_by_month,three_real_meetings_by_month,five_real_meetings_by_month )
+
+    for (var i = 0; i < three_real_meetings_by_week.length; i++){
+
+      data_2[i] = three_real_meetings_by_week[i]-five_real_meetings_by_week[i];
 
 
-   month = shorten_to_n_items(month,6)
-   five_real_meetings_by_month = shorten_to_n_items(five_real_meetings_by_month,6)
+
+    }
+   // console.log(a_real_meeting_by_week,three_real_meetings_by_week,five_real_meetings_by_week )
+
+
+   week = shorten_to_n_items(week,6)
+   five_real_meetings_by_week = shorten_to_n_items(five_real_meetings_by_week,6)
     data_1 = shorten_to_n_items(data_1,6)
     data_2 = shorten_to_n_items(data_2,6)
     data_3 = shorten_to_n_items(data_3,6)
@@ -886,7 +886,7 @@ function real_user_registrations(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
                 labels: {
                 style: {
                     color: 'white'
@@ -941,7 +941,7 @@ function real_user_registrations(){
             series: [{
                 color: '#6FAFDC',
                 name: 'Organized 5',
-                data: five_real_meetings_by_month,
+                data: five_real_meetings_by_week,
                 dataLabels: {x: -20, y:-9,enabled: true,
                     color: 'white'},
 
@@ -992,8 +992,8 @@ var old_creator =[];
 var percent_of_new_real_result = ""
 function percent_of_new_real_meeting(){
 
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_first_real_meeting_creators.jsonv"
-  var url2 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_first_real_meeting_creators_who_had_been_invited_to_a_real_meeting_before.jsonv"
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_first_real_meeting_creators.jsonv"
+  var url2 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_first_real_meeting_creators_who_had_been_invited_to_a_real_meeting_before.jsonv"
 
 
   request(url1, function(error, response, body) {
@@ -1019,7 +1019,7 @@ function percent_of_new_real_meeting(){
   request(url2, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       old_creator = [];
-      month = [];
+      week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -1031,8 +1031,8 @@ function percent_of_new_real_meeting(){
 
           }
 
-          if (prop == "month"){
-            month.push(obj[prop]);
+          if (prop == "week"){
+            week.push(obj[prop]);
 
           }
 
@@ -1054,7 +1054,7 @@ function percent_of_new_real_meeting(){
 
     }
 
-    month = shorten_to_n_items(month,6)
+    week = shorten_to_n_items(week,6)
     percentage = shorten_to_n_items(percentage,6)
     //console.log(percentage)
 
@@ -1079,7 +1079,7 @@ function percent_of_new_real_meeting(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
 
                 labels: {
                 style: {
@@ -1158,15 +1158,15 @@ var tos_acceptions =[];
 var new_meetings_users = [];
 var new_registered_users_result = ""
 
-function new_registered_users_each_month(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/combined_monthly_new_and_tos_accepted_users.jsonv"
+function new_registered_users_each_week(){
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/combined_weekly_new_and_tos_accepted_users.jsonv"
 
   request(url1, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       new_users = [];
       tos_acceptions = [];
       new_meetings_users = [];
-      month = [];
+      week = [];
 
       first_real_meeting_creator = [];
 
@@ -1185,8 +1185,8 @@ function new_registered_users_each_month(){
 
             }
 
-            if (prop == "month"){
-              month.push(obj[prop]);
+            if (prop == "week"){
+              week.push(obj[prop]);
 
             }
 
@@ -1213,7 +1213,7 @@ function new_registered_users_each_month(){
 
   tos_acceptions = shorten_to_n_items(tos_acceptions,6)
   new_meetings_users = shorten_to_n_items(new_meetings_users,6)
-  month = shorten_to_n_items(month,6)
+  week = shorten_to_n_items(week,6)
 
   new_registered_users_result = {
             chart: {
@@ -1236,7 +1236,7 @@ function new_registered_users_each_month(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
 
                 labels: {
                 style: {
@@ -1326,14 +1326,14 @@ var sent_invitations_to_users_with_no_real_meetings = [];
 var with_agenda_an_ap =[];
 
 var with_agenda = [];
-var monthly_sent_invitations_to_users_with_no_real_meetings_created =[];
-var monthly_sent_result = ""
+var weekly_sent_invitations_to_users_with_no_real_meetings_created =[];
+var weekly_sent_result = ""
 
-function monthly_sent_invitations(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_sent_friend_invitations.jsonv"
-  var url2 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_sent_invitations.jsonv"
-  var url3 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_sent_invitations_to_new_users.jsonv"
-  var url4 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_sent_invitations_to_users_with_no_real_meetings_created.jsonv"
+function weekly_sent_invitations(){
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_sent_friend_invitations.jsonv"
+  var url2 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_sent_invitations.jsonv"
+  var url3 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_sent_invitations_to_new_users.jsonv"
+  var url4 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_sent_invitations_to_users_with_no_real_meetings_created.jsonv"
 
   var with_agenda_an_ap =[];
 
@@ -1371,7 +1371,7 @@ function monthly_sent_invitations(){
   request(url2, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       sent_invitations =[];
-      month = [];
+      week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -1383,8 +1383,8 @@ function monthly_sent_invitations(){
 
             }
 
-            if (prop == "month"){
-                month.push(obj[prop]);
+            if (prop == "week"){
+                week.push(obj[prop]);
 
               }
 
@@ -1417,7 +1417,7 @@ function monthly_sent_invitations(){
 
   request(url4, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      monthly_sent_invitations_to_users_with_no_real_meetings_created = [];
+      weekly_sent_invitations_to_users_with_no_real_meetings_created = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -1425,7 +1425,7 @@ function monthly_sent_invitations(){
         for (var prop in obj) {
 
           if (prop == "count"){
-            monthly_sent_invitations_to_users_with_no_real_meetings_created.push(obj[prop]);
+            weekly_sent_invitations_to_users_with_no_real_meetings_created.push(obj[prop]);
 
           }
 
@@ -1440,25 +1440,25 @@ function monthly_sent_invitations(){
 
 
 
-  if(sent_friend_invitations.length == sent_invitations.length && sent_invitations.length == sent_invitations_to_new_users.length && sent_invitations_to_new_users.length == monthly_sent_invitations_to_users_with_no_real_meetings_created.length){
+  if(sent_friend_invitations.length == sent_invitations.length && sent_invitations.length == sent_invitations_to_new_users.length && sent_invitations_to_new_users.length == weekly_sent_invitations_to_users_with_no_real_meetings_created.length){
 
     sent_invitations_to_existing_users = []
 
     for (var i = 0; i < sent_friend_invitations.length; i++){
 
-      sent_invitations_to_existing_users.push(sent_invitations[i]- sent_invitations_to_new_users[i]-monthly_sent_invitations_to_users_with_no_real_meetings_created[i]);
+      sent_invitations_to_existing_users.push(sent_invitations[i]- sent_invitations_to_new_users[i]-weekly_sent_invitations_to_users_with_no_real_meetings_created[i]);
 
 
     }
    // console.log(sent_invitations_to_existing_users)
-    month = shorten_to_n_items(month,6)
+    week = shorten_to_n_items(week,6)
 
     sent_friend_invitations = shorten_to_n_items(sent_friend_invitations,6)
     sent_invitations_to_existing_users = shorten_to_n_items(sent_invitations_to_existing_users,6)
-    monthly_sent_invitations_to_users_with_no_real_meetings_created = shorten_to_n_items(monthly_sent_invitations_to_users_with_no_real_meetings_created,6)
+    weekly_sent_invitations_to_users_with_no_real_meetings_created = shorten_to_n_items(weekly_sent_invitations_to_users_with_no_real_meetings_created,6)
     sent_invitations_to_new_users = shorten_to_n_items(sent_invitations_to_new_users,6)
 
-    monthly_sent_result = {
+    weekly_sent_result = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
@@ -1479,7 +1479,7 @@ function monthly_sent_invitations(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
                 labels: {
                 style: {
                     color: 'white'
@@ -1547,7 +1547,7 @@ function monthly_sent_invitations(){
             },{
                 color: '#326D96',
                 name: 'sent_invitations_to_users_with_no_real_meetings',
-                data: monthly_sent_invitations_to_users_with_no_real_meetings_created,
+                data: weekly_sent_invitations_to_users_with_no_real_meetings_created,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             },{
@@ -1563,25 +1563,25 @@ function monthly_sent_invitations(){
 
 
 
-  return JSON.stringify(monthly_sent_result)
+  return JSON.stringify(weekly_sent_result)
 }
 
 
-var monthly_first_real_meeting_creator = [];
+var weekly_first_real_meeting_creator = [];
 
 var old_meeting_creator =[];
 
 var draft_and_test_meetings = [];
-var monthly_organizers_result = ""
+var weekly_organizers_result = ""
 
-function monthly_organizers_of_real_meetings(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_first_real_meeting_creators.jsonv"
-  var url2 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/monthly_real_meeting_creators_who_were_old_real_creators.jsonv"
+function weekly_organizers_of_real_meetings(){
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_first_real_meeting_creators.jsonv"
+  var url2 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/weekly_real_meeting_creators_who_were_old_real_creators.jsonv"
 
 
   request(url1, function(error, response, body) {
     if (!error && response.statusCode == 200) {
-      monthly_first_real_meeting_creator = [];
+      weekly_first_real_meeting_creator = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -1589,7 +1589,7 @@ function monthly_organizers_of_real_meetings(){
         for (var prop in obj) {
 
           if (prop == "count"){
-            monthly_first_real_meeting_creator.push(obj[prop]);
+            weekly_first_real_meeting_creator.push(obj[prop]);
 
           }
 
@@ -1606,7 +1606,7 @@ function monthly_organizers_of_real_meetings(){
   request(url2, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       old_meeting_creator =[];
-      month = [];
+      week = [];
       json_body = parse_json_string(body)
       for (var key in json_body) {
         var obj = json_body[key];
@@ -1617,8 +1617,8 @@ function monthly_organizers_of_real_meetings(){
 
           }
 
-          if (prop == "month"){
-            month.push(obj[prop]);
+          if (prop == "week"){
+            week.push(obj[prop]);
 
           }
 
@@ -1630,14 +1630,14 @@ function monthly_organizers_of_real_meetings(){
   });
 
 
- if(monthly_first_real_meeting_creator.length == old_meeting_creator.length){
+ if(weekly_first_real_meeting_creator.length == old_meeting_creator.length){
 
     old_meeting_creator = shorten_to_n_items(old_meeting_creator,6)
-    month = shorten_to_n_items(month,6)
-    monthly_first_real_meeting_creator = shorten_to_n_items(monthly_first_real_meeting_creator,6)
+    week = shorten_to_n_items(week,6)
+    weekly_first_real_meeting_creator = shorten_to_n_items(weekly_first_real_meeting_creator,6)
 
 
-    monthly_organizers_result = {
+    weekly_organizers_result = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
@@ -1658,7 +1658,7 @@ function monthly_organizers_of_real_meetings(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
 
                 labels: {
                 style: {
@@ -1720,7 +1720,7 @@ function monthly_organizers_of_real_meetings(){
             },{
                 color: '#0D5487',
                 name: 'First real meeting',
-                data: monthly_first_real_meeting_creator,
+                data: weekly_first_real_meeting_creator,
                 dataLabels: {x: 20, y:9,color: 'white'}
 
             }]
@@ -1733,7 +1733,7 @@ function monthly_organizers_of_real_meetings(){
 
 
 
-  return JSON.stringify(monthly_organizers_result)
+  return JSON.stringify(weekly_organizers_result)
 }
 
 
@@ -1747,11 +1747,11 @@ function monthly_organizers_of_real_meetings(){
     var kpn = [];
 
     var arctic_startup = [];
-    var months = [];
-    var monthly_new_organizers_results =""
+    var weeks = [];
+    var weekly_new_organizers_results =""
 
-function monthly_new_organizers_by_channel(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/partnerized_combined_monthly_new_and_tos_accepted_users.jsonv"
+function weekly_new_organizers_by_channel(){
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/partnerized_combined_weekly_new_and_tos_accepted_users.jsonv"
 
 
 
@@ -1767,13 +1767,13 @@ function monthly_new_organizers_by_channel(){
       arctic_startup = [];
 
       json_body = parse_json_string(body)
-      months = [];
+      weeks = [];
       for (var key in json_body) {
         var obj = json_body[key];
 
 
         if (json_body[key].partner == "any"){
-          months.push(json_body[key].month);
+          weeks.push(json_body[key].week);
           any_partner.push(json_body[key].tos_acceptions)
 
         }
@@ -1804,7 +1804,7 @@ function monthly_new_organizers_by_channel(){
 
 
       }
-  //  console.log(any_partner,seats2meet,months)
+  //  console.log(any_partner,seats2meet,weeks)
 
     }
 
@@ -1813,12 +1813,12 @@ function monthly_new_organizers_by_channel(){
 
 
 
- if(months.length == seats2meet.length){
+ if(weeks.length == seats2meet.length){
     seats2meet = shorten_to_n_items(seats2meet,6)
     any_partner = shorten_to_n_items(any_partner,6)
-    months = shorten_to_n_items(months,6)
+    weeks = shorten_to_n_items(weeks,6)
 
-    monthly_new_organizers_results = {
+    weekly_new_organizers_results = {
             chart: {
                 renderTo: 'container',
                 type: 'area',
@@ -1839,7 +1839,7 @@ function monthly_new_organizers_by_channel(){
                 }
             },
             xAxis: {
-                categories: months,
+                categories: weeks,
 
                 labels: {
                 style: {
@@ -1914,7 +1914,7 @@ function monthly_new_organizers_by_channel(){
 
 
 
-  return JSON.stringify(monthly_new_organizers_results)
+  return JSON.stringify(weekly_new_organizers_results)
 }
 
 
@@ -1926,8 +1926,8 @@ function monthly_new_organizers_by_channel(){
     var meetings_cum_results =""
 
 function meetings_created_cum(){
-  var url1 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_meetings_created_by_month.jsonv"
-  var url2 = "https://meetingstats.dicole.net/js/monthly_stats/jsonv/total_real_meetings_created_by_month.jsonv"
+  var url1 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_meetings_created_by_week.jsonv"
+  var url2 = "https://meetingstats.dicole.net/js/weekly_stats/jsonv/total_real_meetings_created_by_week.jsonv"
 
 
 
@@ -1958,7 +1958,7 @@ function meetings_created_cum(){
   request(url2, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       total_real_meetings_created =[];
-      month = [];
+      week = [];
 
       json_body = parse_json_string(body)
       for (var key in json_body) {
@@ -1970,8 +1970,8 @@ function meetings_created_cum(){
 
           }
 
-          if (prop == "month"){
-              month.push(obj[prop]);
+          if (prop == "week"){
+              week.push(obj[prop]);
 
           }
 
@@ -1994,7 +1994,7 @@ function meetings_created_cum(){
 
     total_real_meetings_created = shorten_to_n_items(total_real_meetings_created,6)
     draft_and_test_meetings = shorten_to_n_items(draft_and_test_meetings,6)
-    month = shorten_to_n_items(month,6)
+    week = shorten_to_n_items(week,6)
 
     meetings_cum_results = {
             chart: {
@@ -2017,7 +2017,7 @@ function meetings_created_cum(){
                 }
             },
             xAxis: {
-                categories: month,
+                categories: week,
 
                 labels: {
                 style: {
@@ -2103,9 +2103,9 @@ exports.registered_within_three = registered_within_three;
 exports.reg_organizers = reg_organizers;
 exports.real_user_registrations = real_user_registrations;
 exports.percent_of_new_real_meeting = percent_of_new_real_meeting;
-exports.new_registered_users_each_month = new_registered_users_each_month;
-exports.monthly_sent_invitations = monthly_sent_invitations;
-exports.monthly_organizers_of_real_meetings = monthly_organizers_of_real_meetings;
-exports.monthly_new_organizers_by_channel = monthly_new_organizers_by_channel;
+exports.new_registered_users_each_week = new_registered_users_each_week;
+exports.weekly_sent_invitations = weekly_sent_invitations;
+exports.weekly_organizers_of_real_meetings = weekly_organizers_of_real_meetings;
+exports.weekly_new_organizers_by_channel = weekly_new_organizers_by_channel;
 exports.meetings_created_cum = meetings_created_cum;
 
