@@ -1,5 +1,5 @@
 #!/bin/bash
-# gitupgrade.sh, 2013-08-28 / Meetin.gs
+# gitupgrade.sh, 2013-08-29 / Meetin.gs
 #
 # Autodeployment script to fetch and update service git repository.
 # This script is, of course, run before new version is available,
@@ -19,6 +19,7 @@ git_checkout() {
     if [ $EXISTS_LOCAL -eq 0 ]; then
         say "Checking out $RANK"
         git checkout $RANK
+        git merge --ff-only refs/remotes/origin/$RANK
     else
         say "Creating local tracking branch for $RANK"
         git checkout -b $RANK origin/$RANK
@@ -41,10 +42,10 @@ git_upgrade() {
     #
     git show-ref -q --verify refs/remotes/origin/$RANK; EXISTS_REMOTE=$?
 
-    if [ $EXISTS_REMOTE -ne 0 ]; then
-        say "No remote branch $RANK, keeping master"
-    else
+    if [ $EXISTS_REMOTE -eq 0 ]; then
         git_checkout
+    else
+        say "No remote branch $RANK, keeping master"
     fi
 
     CURRENT=$(git rev-parse HEAD)
