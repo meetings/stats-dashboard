@@ -1,12 +1,12 @@
 #!/bin/bash
-# gitupgrade.sh, 2013-08-29 / Meetin.gs
+# stage1.sh, 2013-08-30 / Meetin.gs
 #
 # Autodeployment script to fetch and update service git repository.
 # This script is, of course, run before new version is available,
 # thus any new feature is not available.
 
 say() {
-    echo " *** $@"
+    echo " *** stage1: $@"
 }
 
 git_checkout() {

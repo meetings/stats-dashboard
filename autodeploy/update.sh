@@ -1,18 +1,36 @@
 #!/bin/bash
+# update.sh, 2013-11-17 / Meetin.gs
+#
+# Autodeployment (version 2) update hook for
+# generic Node.js service upgrading.
 
-. $DEPLOYDIR/gitupgrade.sh
+set -u
+
+tell() {
+    echo " *** update: $@"
+}
+
+. $DEPLOYDIR/stage1.sh
 
 git_upgrade && {
-    say "Version has not changed, exiting"
+    tell Version has not changed, exiting
     exit 0
 }
 
-npm update
-say "Modules updated"
+. $DEPLOYDIR/stage2.sh
 
-install -m 0644 $DEPLOYDIR/$INTENT.conf /etc/init
-git rev-parse HEAD > $THE_VERSION_FILE
-say "Current head is at $(cat $THE_VERSION_FILE)"
+acquire_lock && {
+    tell Lock acquired, trying to update
+    npm update 2> /dev/null
 
-service stats restart
-say "Service restarted"
+    tell Installing service configuration
+    install -m 0644 -p $DEPLOYDIR/$INTENT.conf /etc/init/
+
+    tell Updating version
+    git rev-parse HEAD | tee $VERSIONFILE
+
+    tell Restarting service
+    service $INTENT restart
+
+    release_lock || true
+}
