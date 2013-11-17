@@ -1,5 +1,5 @@
 #!/bin/bash
-# stage1.sh, 2013-08-30 / Meetin.gs
+# stage1.sh, 2013-11-18 / Meetin.gs
 #
 # Autodeployment script to fetch and update service git repository.
 # This script is, of course, run before new version is available,
@@ -31,13 +31,14 @@ git_upgrade() {
     say $PREVIOUS
 
     # Regardless of current state of the repository,
-    # fetch and merge changes.
+    # reset everything as they are in upstream.
     #
     git checkout --force master
-    git clean --force
+    git clean -d --force
     git pull --all
+    git remote prune origin
 
-    # If there is no remote branch for this machines
+    # If there is no remote branch for this hosts
     # rank, stay in master and be happy with it.
     #
     git show-ref -q --verify refs/remotes/origin/$RANK; EXISTS_REMOTE=$?
